@@ -6,20 +6,22 @@
         <link rel="stylesheet" href="estilo.css"/>
     </head>
     <body>
-
         <div class="contenedorLogin">
             <div class="login">
+
                 <?php
 
                     error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
-                    // Las siguientes 2 líneas corresponden a la verificación de la variable error según sea el resultado de la validación de los datos ingresados en el archivo validar.php.
+                    // receive variable "error" from script validar.php, and check whether its value is "si"
                     if ($_GET["error"] == "si") {
                         echo "<span style='color:#F00; font-size:2em;'>POR FAVOR, VERIFICA TUS DATOS</span>";
                     }
 
                 ?>
+
                 <h2 align="center">BIENVENIDOS AL GESTOR DE BODEGA</br></h2>
                 <h3 align="center">Por favor ingresa tus datos</h3>
+
                 <form name="login" method="post" action="validar.php" enctype="application/x-www-form-urlencoded">
                     <div class="campos">
                         <label for="usuario">Usuario:</label>
@@ -36,8 +38,8 @@
                         <p class="mensaje" name="mensaje"></p>
                     </div>
                 </form>
-            </div>
 
+            </div>
         </div>
     </body>
 </html>

@@ -1,12 +1,24 @@
 <?php
 
-	// mysql_connect is a function that requires 3 parameters : server name, user name, server password (empty not spaced quote marks if no password has been set)
-	$conexion = mysqli_connect("localhost", "root", "") or die("unable to connect to database gestion_bodega </br>");
+	$host = '127.0.0.1';
+	$db = 'gestion_bodega';
+	$user = 'root';
+	$pass = '';
+	$port = '3306';
+	$charset = 'utf8mb4';
+	
+	// DSN is a semicolon-delimited string, consists of param=value pairs
+	$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
-	// allows display of special characters
-	mysqli_set_charset($conexion, "utf8");
+	$options = [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC, \PDO::ATTR_EMULATE_PREPARES => false,];
 
-	// select database
-	mysqli_select_db($conexion, "gestion_bodega") or die("database gestion_bodega not found </br>");
+	try {
+		// wrap the creation of an instance of PDO class into a try..catch statement
+		$pdo = new PDO($dsn, $user, $pass, $options);
+	// to avoid even a chance to reveal the database credentials, catch the Exception
+	} catch (\PDOException $e) {
+		// immediately re-throw them, and begin stack trace without the database credentials
+		throw new \PDOException($e->getMessage(), (int)$e->getCode());
+	}
 
 ?>

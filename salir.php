@@ -1,12 +1,6 @@
-<!--
-Verificar que la variable sal sea igual a si.
-Cerrar la sesión.
-Redirigir el flujo a la pagina del login
--->
-
 <?php
 
-	// receive variable 'sal' with value 'si' from script sesion.php
+	// receive variable 'sal' from script sesion.php, and check whether its value is 'si'
 	if ($_GET['sal'] == 'si') {
 		session_start();
 		session_destroy();

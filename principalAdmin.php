@@ -1,4 +1,3 @@
-<!-- Incluir archivos requeridos -->
 <?php include('sesion.php'); ?>
 
 <!DOCTYPE html>
@@ -9,7 +8,6 @@
         <link rel="stylesheet" href="estilo.css"/>
     </head>
     <body>
-
         <div class="contenedor">
             <h1 align="center">CUENTA DE ADMINISTRADOR</h1>
             <div class= "encabezado">
@@ -25,8 +23,7 @@
             </div>
 
             <br><h1 align="center">CONTROL DE PRODUCTO</h1><br>
-
-            </div>
+            
             <div>
                 <table align="center" class="tabla">
                     <tr height="150">
@@ -39,13 +36,11 @@
                     <br><br><br>Eliminar producto<td></center>
                     </tr>
                 </table>
-
             </div>
 
             <div class="encabezado">
                 <h2>CONTROL DE PERSONAL</h2>
             </div>
-
             <div>
                 <table align="center" class="tabla">
                     <tr height="150">
@@ -58,7 +53,6 @@
                     <br><br><br>Eliminar personal<td></center>
                     </tr>
                 </table>
-
             </div>
         </div>
     </body>
