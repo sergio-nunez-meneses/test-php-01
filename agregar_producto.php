@@ -1,4 +1,3 @@
-<!-- Inclución de archivos requeridos -->
 <?php include('sesion.php'); ?>
 
 <!DOCTYPE html>
@@ -9,18 +8,19 @@
         <link rel="stylesheet" href="estilo.css"/>
     </head>
     <body>
-
         <div class="contenedor">
             <div class= "encabezado">
             <div class="izq">
+
                 <p>Bienvenido/a:<br> <!-- Agregar variable de sesión con nombre y apellido del usuario --></p>
                 <?php echo $_SESSION["nombre"] . " " . $_SESSION["apellido"]; ?> <br>
 
             </div>
             <div class="centro">
+
                 <?php
 
-                    // La siguiente validación verifica el cargo del usuario que esta viendo esta pagina para asignarle el flujo que tendra el links con imagen "Home".
+                    // check user "cargo" to display the corresponding "home" button
                     if ($_SESSION['cargo'] == 'Admin') {
                         echo "<a href=principalAdmin.php><center><img src='imagenes/home.png'><br> Home <center></a>";
                     } else {
@@ -34,12 +34,10 @@
             </div>
 
             <div class="derecha">
-                <!--
-                La siguiente línea corresponde al links con imagen para finalizar sesión, que redirige a la página salir.php con la varible "sal=si" que destruye la sesión y nos muestra la pagina del login.
-                -->
                 <a href="salir.php?sal=si"><img src="imagenes/cerrar.png"><br>Salir</a>
             </div>
         </div>
+
         <br><h1 align="center">GESTIÓN DE PRODUCTOS</h1>
 
             <div class="formulario">
@@ -72,31 +70,20 @@
                     <div class="botones">
                         <input type="submit" name="crear" value="Agregar producto"/>
                     </div>
-                    <!--
-                    Verificación del boton submit "crear".
-                    Recuperar las variables con los valores ingresados.
-                    Verificar que el código no exista en los registros.
-                    Si ya existe un producto con ese codigo:
-                        Mostrar mensaje con información.
-
-                    Si no existe un producto con ese código:
-                        Insertar los datos en la tabla correspondiente.
-
-                    Redirigir el flujo a esta misma página
-                    -->
 
                     <?php
 
                         include("conexion.php");
 
-                        $consulta = "SELECT * FROM productos";
-                        $ejecutar = mysqli_query($conexion, $consulta);
-                        $resultado = mysqli_fetch_array($ejecutar);
-
                         if (isset($_POST['crear'])) {
                             $codigo = $_POST['codigo'];
+
+                            $stmt = $pdo->prepare("SELECT * FROM productos WHERE cod_producto = ?"); // PDO::prepare() method
+                            $stmt->execute([$codigo]); // PDO::execute() method
+                            $product = $stmt->fetch(); // array offset on value of type bool
+
                             // check if primary key already exists in the database
-                            if ($codigo == $resultado['cod_producto']) {
+                            if ($product !== false) { 
                                 echo "<p class='mensaje'> Ya existe un producto asociado al código ingresado </p>";
                             } else {
                                 // create variables
@@ -105,17 +92,16 @@
                                 $proveedor = $_POST['proveedor'];
                                 $fecha = $_POST['fecha'];
                                 // add values to database
-                                $consulta = "INSERT INTO productos(cod_producto, descripcion, stock, proveedor, fecha_ingreso) VALUES ('$codigo', '$descripcion', '$stock', '$proveedor', '$fecha')";
-                                $ejecutar = mysqli_query($conexion, $consulta) or die ("unable to add product to database gestion_bodega");
+                                $sql = "INSERT INTO productos(cod_producto, descripcion, stock, proveedor, fecha_ingreso) VALUES (?, ?, ?, ?, ?)";
+                                $pdo->prepare($sql)->execute([$codigo, $descripcion, $stock, $proveedor, $fecha]);
                                 echo "<p class='mensaje'> Producto agregado correctamente </p>";
                             }
-                        };
+                        }
 
                     ?>
 
                 </form>
             </div>
-
         </div>
     </body>
 </html>

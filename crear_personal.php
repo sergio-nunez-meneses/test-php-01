@@ -1,4 +1,3 @@
-<!-- Incluir archivos requeridos -->
 <?php include('sesion.php'); ?>
 
 <!DOCTYPE html>
@@ -9,17 +8,13 @@
         <link rel="stylesheet" href="estilo.css"/>
     </head>
     <body>
-
         <div class="contenedor">
 
-            <?php
-
-                error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
-
-            ?>
+            <?php error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING); ?>
 
             <div class= "encabezado">
                 <div class="izq">
+
                     <p>Bienvenido/a:<br><!-- Agregar variable de sesión con nombre y apellido del usuario --></p>
                     <?php echo $_SESSION["nombre"] . " " . $_SESSION["apellido"]; ?> <br>
 
@@ -77,12 +72,6 @@
 
                     <div class="botones">
                         <input type="submit" name="boton-enviar" value="crear usuario"/>
-                        <!--
-                        Realizar verificación de variables segun sea el resultado de la validación en el archivo registro.php:
-                        caso 1: Entregar el mensaje "Las contraseñas no coinciden",
-                        caso 2: Entregar el mensaje "Usuario creado correctamente",
-                        caso 3: entregar mensaje "Ya existe un registro asociado al rut ingresado".
-                        -->
 
                         <?php
 
@@ -99,7 +88,6 @@
                     </div>
                 </form>
             </div>
-
         </div>
     </body>
 </html>

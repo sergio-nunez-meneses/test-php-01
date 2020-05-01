@@ -23,7 +23,6 @@
             </div>
 
             <br><h1 align="center">CONTROL DE PRODUCTO</h1><br>
-            
             <div>
                 <table align="center" class="tabla">
                     <tr height="150">

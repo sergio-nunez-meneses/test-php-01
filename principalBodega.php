@@ -1,4 +1,3 @@
-<!-- Incluir archivos requeridos -->
 <?php include('sesion.php') ?>
 
 <!DOCTYPE html>
@@ -9,7 +8,6 @@
         <link rel="stylesheet" href="estilo.css"/>
     </head>
     <body>
-
         <div class="contenedor">
             <h1 align="center">CUENTA DE BODEGA</h1>
             <div class= "encabezado">
@@ -26,7 +24,6 @@
 
             <br><h2 align="center">CONTROL DE PRODUCTOS</h2><br>
 
-            </div>
             <div>
                 <table align="center" class="tabla">
                     <tr height="150">
@@ -43,9 +40,7 @@
                     <br><br><br>Entregas realizadas<td></center>
                     </tr>
                 </table>
-
             </div>
         </div>
-
     </body>
 </html>
